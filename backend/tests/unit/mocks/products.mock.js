@@ -38,9 +38,27 @@ const productFromModel = {
   name: 'Martelo de Thor',
 };
 
+const allProductsFromService = {
+  status: 'SUCCESSFUL',
+  data: allProductsFromModel,
+};
+
+const productFromServiceValid = {
+  status: 'SUCCESSFUL',
+  data: productFromModel,
+};
+
+const productFromServiceInvalid = {
+  status: 'NOT_FOUND',
+  data: { message: 'Product not found' },
+};
+
 module.exports = {
   allProductsFromDB,
   productFromDB,
   allProductsFromModel,
   productFromModel,
+  allProductsFromService,
+  productFromServiceValid,
+  productFromServiceInvalid,
 };

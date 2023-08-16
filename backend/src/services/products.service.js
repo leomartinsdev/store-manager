@@ -1,5 +1,5 @@
 const { productsModel } = require('../models');
-
+// save12
 const findAll = async () => {
   const products = await productsModel.findAll();
 
