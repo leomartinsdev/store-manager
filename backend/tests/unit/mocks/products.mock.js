@@ -1,3 +1,6 @@
+const productIdFromDB = { insertId: 55 };
+const productIdFromModel = 55;
+
 const allProductsFromDB = [
   {
     id: 1,
@@ -38,6 +41,15 @@ const productFromModel = {
   name: 'Martelo de Thor',
 };
 
+const newProductFromModel = {
+  id: 11,
+  name: 'ProdutoXYZ',
+};
+
+const productFromModelInvalid = {
+    message: 'Product not found',
+};
+
 const allProductsFromService = {
   status: 'SUCCESSFUL',
   data: allProductsFromModel,
@@ -53,12 +65,22 @@ const productFromServiceInvalid = {
   data: { message: 'Product not found' },
 };
 
+const insertServiceValid = {
+  status: 'CREATED',
+  data: newProductFromModel,
+};
+
 module.exports = {
   allProductsFromDB,
   productFromDB,
   allProductsFromModel,
   productFromModel,
+  productFromModelInvalid,
   allProductsFromService,
   productFromServiceValid,
   productFromServiceInvalid,
+  productIdFromDB,
+  productIdFromModel,
+  newProductFromModel,
+  insertServiceValid,
 };

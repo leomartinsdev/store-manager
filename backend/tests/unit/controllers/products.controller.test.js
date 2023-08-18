@@ -10,6 +10,10 @@ const { productsController } = require('../../../src/controllers');
 const { allProductsFromService, productFromServiceValid, productFromServiceInvalid, allProductsFromModel, productFromModel } = require('../mocks/products.mock');
 
 describe('Realizando os testes de Products Controller', function () {
+  afterEach(function () {
+    sinon.restore();
+  });
+  
   it('Recuperando todos os produtos', async function () {
     sinon.stub(productsService, 'findAll').resolves(allProductsFromService);
     const req = {
@@ -53,9 +57,5 @@ describe('Realizando os testes de Products Controller', function () {
     await productsController.findById(req, res);
     expect(res.status).to.have.been.calledWith(404);
     expect(res.json).to.have.been.calledWith(sinon.match.has('message'));
-  });
-
-  afterEach(function () {
-    sinon.restore();
   });
 });

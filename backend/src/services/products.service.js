@@ -17,7 +17,6 @@ const findById = async (id) => {
 const registerProduct = async (newProductName) => {
   const insertId = await productsModel.registerProduct(newProductName);
   const newProductData = await productsModel.findById(insertId);
-  // if (!newProductData) return {};
 
   return { status: 'CREATED', data: newProductData };
 };
