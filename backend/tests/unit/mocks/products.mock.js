@@ -41,13 +41,13 @@ const productFromModel = {
   name: 'Martelo de Thor',
 };
 
-const newProductFromModel = {
-  id: 11,
-  name: 'ProdutoXYZ',
-};
-
 const productFromModelInvalid = {
     message: 'Product not found',
+};
+
+const newProductFromModel = {
+  id: 55,
+  name: 'ProdutoXYZ',
 };
 
 const allProductsFromService = {

@@ -14,7 +14,29 @@ const findById = async (id) => {
   return { status: 'NOT_FOUND', data: { message: 'Sale not found' } };
 };
 
+const registerSale = async (newSale) => {
+  console.log('newsale no serv:', newSale);
+  const saleId = await salesModel.registerSale(newSale);
+  const sale = await salesModel.findById(saleId);
+
+  if (sale) {
+    const soldItems = sale.map((item) => ({
+      productId: item.productId,
+      quantity: item.quantity,
+    }));
+
+    return {
+      status: 'CREATED',
+      data: {
+        id: saleId,
+        itemsSold: soldItems,
+      },
+    };
+  }
+};
+
 module.exports = {
   findAll,
   findById,
+  registerSale,
 };
