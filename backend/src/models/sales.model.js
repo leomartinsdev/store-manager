@@ -25,8 +25,6 @@ const findById = async (salesId) => {
 const registerSale = async (newSale) => {
   const saleDate = new Date();
 
-  console.log('newsale no m1:', newSale);
-
   const [{ insertId }] = await connection.execute(
     'INSERT INTO sales (date) VALUE (?);',
     [saleDate],

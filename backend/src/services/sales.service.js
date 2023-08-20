@@ -1,4 +1,7 @@
 const { salesModel } = require('../models');
+const { productsModel } = require('../models');
+
+const validateNewSale = require('./validations/validationsValues');
 
 const findAll = async () => {
   const sales = await salesModel.findAll();
@@ -14,16 +17,28 @@ const findById = async (id) => {
   return { status: 'NOT_FOUND', data: { message: 'Sale not found' } };
 };
 
+const verifyId = async (newSale) => {
+  const response = await Promise.all(newSale
+    .map(({ productId }) => productsModel.findById(productId)));
+
+  const errorResult = response.some((result) => result === undefined);
+  if (errorResult) {
+    return { status: 'NOT_FOUND', message: 'Product not found' };
+  }
+};
+
 const registerSale = async (newSale) => {
-  console.log('newsale no serv:', newSale);
+  const error = validateNewSale(newSale);
+  if (error) return { status: error.status, data: { message: error.message } };
+
+  const idError = await verifyId(newSale);
+  if (idError) return { status: idError.status, data: { message: idError.message } };
+
   const saleId = await salesModel.registerSale(newSale);
   const sale = await salesModel.findById(saleId);
 
   if (sale) {
-    const soldItems = sale.map((item) => ({
-      productId: item.productId,
-      quantity: item.quantity,
-    }));
+    const soldItems = sale.map((item) => ({ productId: item.productId, quantity: item.quantity }));
 
     return {
       status: 'CREATED',
