@@ -26,8 +26,23 @@ const registerProduct = async (newProductName) => {
   return insertId;
 };
 
+const updateProduct = async (name, id) => {
+  await connection.execute(
+    'UPDATE products SET name = ? WHERE id = ?',
+    [name, id],
+  );
+
+  const [[updatedProduct]] = await connection.execute(
+    'SELECT * FROM products WHERE id = ?',
+    [id],
+  );
+
+  return camelize(updatedProduct);
+};
+
 module.exports = {
   findAll,
   findById,
   registerProduct,
+  updateProduct,
 };

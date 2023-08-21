@@ -23,8 +23,18 @@ const registerProduct = async (req, res) => {
   return res.status(mapStatusHTTP(status)).json(data);
 };
 
+const updateProduct = async (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+
+  const { status, data } = await productsService.updateProduct(name, id);
+
+  return res.status(mapStatusHTTP(status)).json(data);
+};
+
 module.exports = {
   findAll,
   findById,
   registerProduct,
+  updateProduct,
 };

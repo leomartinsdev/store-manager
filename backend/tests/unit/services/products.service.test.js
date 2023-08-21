@@ -1,7 +1,5 @@
-const chai = require('chai');
+const { expect } = require('chai');
 const sinon = require('sinon');
-
-const { expect } = chai;
 
 const { productsModel } = require('../../../src/models');
 const { productsService } = require('../../../src/services');
@@ -47,5 +45,18 @@ describe('Testando o products.service:', function () {
     const responseService = await productsService.registerProduct(inputData);
     expect(responseService.status).to.equal('CREATED');
     expect(responseService.data).to.deep.equal(newProductFromModel);
+  });
+
+  it('Atualiza um produto com sucesso', async function () {
+    const expectedProductReturn = { id: 1, name: 'Martelo do Batman' };
+    sinon.stub(productsModel, 'updateProduct').resolves(expectedProductReturn);
+    sinon.stub(productsModel, 'findById').resolves(expectedProductReturn);
+
+    const inputId = 1;
+    const inputName = { name: 'Martelo do Batman' };
+
+    const responseService = await productsService.updateProduct(inputName.name, inputId);
+    const expectedResponse = { status: 'SUCCESSFUL', data: { id: 1, name: 'Martelo do Batman' } };
+    expect(responseService).to.deep.equal(expectedResponse);
   });
 });
