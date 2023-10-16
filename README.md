@@ -8,10 +8,11 @@ O aplicativo foi desenvolvido utilizando Node.js, Express como framework para No
 - JavaScript
 - Docker
 - Express
+- mysql2
+- MySQL
 - Routes
 - Arquitetura em Camadas (MSC)
 - Joi
-- MySQL
 
 ## Como rodar o projeto
 1) Usando Docker:
