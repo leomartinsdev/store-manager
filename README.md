@@ -13,6 +13,7 @@ O aplicativo foi desenvolvido utilizando Node.js, Express como framework para No
 - Routes
 - Arquitetura em Camadas (MSC)
 - Joi
+- Testes com Jest, Mocha, Chai e Sinon.
 
 ## Como rodar o projeto
 1) Usando Docker:
